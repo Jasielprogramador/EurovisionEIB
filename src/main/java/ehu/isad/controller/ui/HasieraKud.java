@@ -9,12 +9,17 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import ehu.isad.utils.Utils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
 
 public class HasieraKud implements Initializable {
 
@@ -32,23 +37,24 @@ public class HasieraKud implements Initializable {
 
     @FXML
     void klikEgin(ActionEvent event) {
-
+        main.herrialdeakHautatuErakutsi();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        imgIrudia.setImage(setIcon("/resources/hasiera.png"));
+        //imgIrudia.setImage(hasierakoIrudiaLortu());
     }
 
-    public ImageView setIcon(String path) {
+    public Image hasierakoIrudiaLortu() {
 
-        InputStream is=Utils.class
-                .getResourceAsStream(path);
-        ImageView iv = new ImageView(new Image(is));
-
-        iv.setFitWidth(100);
-        iv.setFitHeight(100);
-        Image image = SwingFXUtils.toFXImage(iv, null);
-        return image;
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(getClass().getResource("/resources/hasiera.png"));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image emaitza = SwingFXUtils.toFXImage(image, null);
+        return emaitza;
     }
 }

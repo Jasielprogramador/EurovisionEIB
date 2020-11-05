@@ -3,7 +3,10 @@
  */
 package ehu.isad;
 
+import ehu.isad.controller.ui.ErroreaKud;
 import ehu.isad.controller.ui.HasieraKud;
+import ehu.isad.controller.ui.HerrialdeaBozkatuKud;
+import ehu.isad.controller.ui.HerrialdeaHautatuKud;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +21,18 @@ public class EurovisionEIB extends Application {
 
     private Stage stage;
 
+    private Scene sceneHasiera;
+    private Scene sceneHerrialdeaHautatu;
+    private Scene sceneErrorea;
+    private Scene sceneHerrialdeBozkatu;
+    private Parent herrialdeaHautatuUI;
+    private Parent hasieraUI;
+    private Parent erroreaUI;
+    private Parent herrialdeaBozkatuUI;
     private HasieraKud hasieraKud;
+    private HerrialdeaHautatuKud herrialdeaHautatuKud;
+    private ErroreaKud erroreaKud;
+    private HerrialdeaBozkatuKud herrialdeaBozkatuKud;
 
 
     @Override
@@ -27,15 +41,62 @@ public class EurovisionEIB extends Application {
         pantailakKargatu();
 
         stage.setTitle("EUROVISION EIB");
-        stage.setScene(new Scene(EurobisioaUI));
+        stage.setScene(sceneHasiera);
         stage.show();
     }
 
+    //ESZENA GUZTIAK
+    public void hasieraErakutsi(){
+        stage.setScene(sceneHasiera);
+    }
+
+    public void herrialdeakHautatuErakutsi(){
+        stage.setScene(sceneHerrialdeaHautatu);
+    }
+
+    public void erroreaErakutsi(){
+        stage.setScene(sceneErrorea);
+    }
+
+    public void herrialdeaBozkatuErakutsi(){stage.setScene(sceneHerrialdeBozkatu);}
+
+
+    //PANTAILA KARGATZEKO
     private void pantailakKargatu() throws IOException {
 
-        FXMLLoader loaderEurobisioa = new FXMLLoader(getClass().getResource("/hasiera.fxml"));
-        EurobisioaUI = (Parent) loaderEurobisioa.load();
-        hasieraKud = loaderEurobisioa.getController();
+        FXMLLoader loaderHasiera = new FXMLLoader(getClass().getResource("/hasiera.fxml"));
+        hasieraUI = (Parent) loaderHasiera.load();
+        hasieraKud = loaderHasiera.getController();
         hasieraKud.setMainApp(this);
+        sceneHasiera=new Scene(hasieraUI);
+
+        FXMLLoader loaderHerrialdeaHautatu = new FXMLLoader(getClass().getResource("/herrialdeaHautatu.fxml"));
+        herrialdeaHautatuUI = (Parent) loaderHerrialdeaHautatu.load();
+        herrialdeaHautatuKud = loaderHerrialdeaHautatu.getController();
+        herrialdeaHautatuKud.setMainApp(this);
+        sceneHerrialdeaHautatu=new Scene(herrialdeaHautatuUI);
+
+        FXMLLoader loaderErrorea = new FXMLLoader(getClass().getResource("/errorea.fxml"));
+        erroreaUI = (Parent) loaderErrorea.load();
+        erroreaKud = loaderErrorea.getController();
+        erroreaKud.setMainApp(this);
+        sceneErrorea=new Scene(erroreaUI);
+
+        FXMLLoader loaderHerrialdeaBozkatu = new FXMLLoader(getClass().getResource("/herrialdeaBozkatu.fxml"));
+        herrialdeaBozkatuUI = (Parent) loaderHerrialdeaBozkatu.load();
+        herrialdeaBozkatuKud = loaderHerrialdeaBozkatu.getController();
+        herrialdeaBozkatuKud.setMainApp(this);
+        sceneHerrialdeBozkatu=new Scene(herrialdeaBozkatuUI);
     }
+
+    //GET-AK
+    public ErroreaKud getErroreaKud(){
+        return this.erroreaKud;
+    }
+
+    public HerrialdeaBozkatuKud getHerrialdeaBozkatuKud(){
+        return this.herrialdeaBozkatuKud;
+    }
+
+
 }
