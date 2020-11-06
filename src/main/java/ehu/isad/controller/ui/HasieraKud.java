@@ -42,19 +42,7 @@ public class HasieraKud implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //imgIrudia.setImage(hasierakoIrudiaLortu());
+
     }
 
-    public Image hasierakoIrudiaLortu() {
-
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResource("/resources/hasiera.png"));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image emaitza = SwingFXUtils.toFXImage(image, null);
-        return emaitza;
-    }
 }

@@ -98,5 +98,7 @@ public class EurovisionEIB extends Application {
         return this.herrialdeaBozkatuKud;
     }
 
+    public HerrialdeaHautatuKud getHerrialdeaHautatuKud(){return this.herrialdeaHautatuKud;}
+
 
 }

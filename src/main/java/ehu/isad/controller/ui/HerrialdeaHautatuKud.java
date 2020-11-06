@@ -19,7 +19,7 @@ public class HerrialdeaHautatuKud implements Initializable {
     private EurovisionEIB main;
 
     @FXML
-    private ComboBox<String> comboHerrialdeak;
+    public ComboBox<String> comboHerrialdeak;
 
     @FXML
     private Button btnBotoia;
@@ -42,7 +42,6 @@ public class HerrialdeaHautatuKud implements Initializable {
         }
         else{
             main.getHerrialdeaBozkatuKud().labelIdatzi(comboHerrialdeak.getValue());
-            //poner el pais
             main.herrialdeaBozkatuErakutsi();
         }
     }
@@ -54,6 +53,7 @@ public class HerrialdeaHautatuKud implements Initializable {
         herrialdeak.addAll(HerrialdeaHautatuDBKud.getInstance().lortuHerrialdeak());
 
         comboHerrialdeak.setItems(herrialdeak);
+        comboHerrialdeak.getSelectionModel().selectFirst();
         comboHerrialdeak.setEditable(false);
     }
 

@@ -1,6 +1,7 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.EurovisionEIB;
+import ehu.isad.controller.db.ErroreaDBKud;
 import ehu.isad.controller.db.HerrialdeaBozkatuDBKud;
 import ehu.isad.partaideak.Partaidea;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
@@ -30,7 +32,10 @@ public class HerrialdeaBozkatuKud implements Initializable {
     private EurovisionEIB main;
 
     @FXML
-    private Label lblLabel;
+    private Label lblLabela;
+
+    @FXML
+    private Image imgBandera;
 
     @FXML
     private Button btnBotoia;
@@ -54,12 +59,13 @@ public class HerrialdeaBozkatuKud implements Initializable {
     private TableColumn<Partaidea, Integer> tblPuntuak;
 
 
+
     public void setMainApp(EurovisionEIB main) {
         this.main = main;
     }
 
-    public void labelIdatzi(String herrialdea){
-        lblLabel.setText(herrialdea+"k horrela nahi ditu bere puntuak banatu:");
+    public void labelIdatzi(String herrialdea) {
+        lblLabela.setText(herrialdea + "k horrela nahi ditu bere puntuak banatu:");
     }
 
     @FXML
@@ -67,15 +73,40 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     }
 
+    private boolean herrialdeEzinBozkatu(){
+        if(tblHerrialdea.equals(main.getHerrialdeaHautatuKud().comboHerrialdeak)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private Image irudiaLortu(String herrialdea) {
+
+        Image image = null;
+        ErroreaDBKud erroreaDBKud = new ErroreaDBKud();
+        image = new Image(getClass().getResourceAsStream("/"+erroreaDBKud.lortuHerrialdearenBandera(herrialdea)+".png"));
+        return image;
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         HerrialdeaBozkatuDBKud herrialdeaBozkatuDBKud = new HerrialdeaBozkatuDBKud();
-        List<Partaidea> kargatzekoa=herrialdeaBozkatuDBKud.bozkatzekoHerrialdeakKargatu();
+        imgBandera=this.irudiaLortu(main.getHerrialdeaHautatuKud().comboHerrialdeak.getValue());
+
+
+        List<Partaidea> kargatzekoa = herrialdeaBozkatuDBKud.bozkatzekoHerrialdeakKargatu();
         ObservableList<Partaidea> Partaideak = FXCollections.observableArrayList(kargatzekoa);
 
+        //add your data to the table here.
+        tblTaula.setItems(Partaideak);
         tblTaula.setEditable(true);
+
+
         //make sure the property value factory should be exactly same as the e.g getStudentId from your model class
+
         tblBandera.setCellValueFactory(new PropertyValueFactory<>("Bandera"));
         tblHerrialdea.setCellValueFactory(new PropertyValueFactory<>("Herrialdea"));
         tblArtista.setCellValueFactory(new PropertyValueFactory<>("Artista"));
@@ -83,13 +114,24 @@ public class HerrialdeaBozkatuKud implements Initializable {
         tblPuntuak.setCellValueFactory(new PropertyValueFactory<>("Puntuak"));
 
 
-        Callback<TableColumn<Partaidea, String>, TableCell<Partaidea, String>> defaultTextFieldCellFactory
-                = TextFieldTableCell.<Partaidea>forTableColumn();
+/*        if(this.herrialdeEzinBozkatu()){
+            tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn());
+        }
+        else{
+            tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        }*/
 
-        tblBandera.setCellValueFactory(new PropertyValueFactory<Partaidea, Image>("bandera"));
+        tblPuntuak.setOnEditCommit(
+                t -> {
+                    if (!this.herrialdeEzinBozkatu()) {
+                        t.getTableView().getItems().get(t.getTablePosition().getRow())
+                                .setPuntuak(t.getNewValue());
+                    }
+                });
 
+        //Irudia kargatzeko
         tblBandera.setCellFactory(p -> new TableCell<>() {
-            private void updateItem(javafx.scene.image.Image image, boolean empty) {
+            public void updateItem(Image image, boolean empty) {
                 if (image != null && !empty){
                     final ImageView imageview = new ImageView();
                     imageview.setFitHeight(50);
@@ -105,69 +147,9 @@ public class HerrialdeaBozkatuKud implements Initializable {
             };
         });
 
-        tblHerrialdea.setCellFactory(col -> {
-            TableCell<Partaidea, String> cell = defaultTextFieldCellFactory.call(col);
-
-            cell.setOnMouseClicked(event -> {
-                if (! cell.isEmpty()) {
-                    cell.setEditable(false);
-                }
-            });
-
-            return cell ;
-        });
-
-        tblArtista.setCellFactory(col -> {
-            TableCell<Partaidea, String> cell = defaultTextFieldCellFactory.call(col);
-
-            cell.setOnMouseClicked(event -> {
-                if (! cell.isEmpty()) {
-                    cell.setEditable(false);
-                }
-            });
-
-            return cell ;
-        });
-
-        tblAbestia.setCellFactory(col -> {
-            TableCell<Partaidea, String> cell = defaultTextFieldCellFactory.call(col);
-
-            cell.setOnMouseClicked(event -> {
-                if (! cell.isEmpty()) {
-                    cell.setEditable(false);
-                }
-            });
-
-            return cell ;
-        });
-
-        tblPuntuak.setCellFactory(
-                TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-
-        tblPuntuak.setOnEditCommit(
-                t -> {
-                    t.getTableView().getItems().get(t.getTablePosition().getRow())
-                            .setPuntuak(t.getNewValue());
-                }
-        );
-
-        tblArtista.setCellFactory(col -> {
-            TableCell<Partaidea, String> cell = defaultTextFieldCellFactory.call(col);
-
-            cell.setOnMouseClicked(event -> {
-                cell.setEditable(true);
-
-            });
-
-            return cell ;
-        });
-
-        //add your data to the table here.
-        tblTaula.setItems(Partaideak);
     }
-
-
-
-
-
 }
+
+
+
+

@@ -15,7 +15,7 @@
       </Button>
       <ImageView fx:id="imgIrudia" fitHeight="106.0" fitWidth="319.0" layoutX="61.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Images/eurovisionLogo.png" />
+            <Image url="@hasiera.png" />
          </image>
       </ImageView>
    </children>

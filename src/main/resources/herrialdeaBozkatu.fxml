@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.HerrialdeaBozkatuKud">
+<AnchorPane fx:id="imgBandera" prefHeight="523.0" prefWidth="764.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.HerrialdeaBozkatuKud">
    <children>
-      <Label fx:id="lblLabel" layoutX="60.0" layoutY="31.0" />
-      <TableView fx:id="tblTaula" layoutX="44.0" layoutY="77.0" prefHeight="246.0" prefWidth="513.0">
+      <TableView fx:id="tblTaula" layoutX="49.0" layoutY="139.0" prefHeight="296.0" prefWidth="667.0">
         <columns>
             <TableColumn fx:id="tblBandera" prefWidth="75.0" text="Bandera" />
             <TableColumn fx:id="tblHerrialdea" prefWidth="75.0" text="Herrialdea" />
@@ -21,6 +22,13 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="btnBotoia" layoutX="219.0" layoutY="341.0" mnemonicParsing="false" onAction="#onClick" text="Bozkaketak Gorde" />
+      <Button fx:id="btnBotoia" layoutX="314.0" layoutY="458.0" mnemonicParsing="false" onAction="#onClick" text="Bozkaketak Gorde" />
+      <Label fx:id="lblLabela" layoutX="201.0" layoutY="62.0" text="Label" />
+      <ImageView fitHeight="77.0" fitWidth="266.0" layoutX="472.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@hasiera.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="147.0" layoutX="27.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -2,11 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.ErroreaKud">
    <children>
-      <Label fx:id="lblLabela" layoutX="257.0" layoutY="178.0" prefHeight="24.0" prefWidth="118.0" />
-      <Button fx:id="btnBotoia" layoutX="257.0" layoutY="267.0" mnemonicParsing="false" onAction="#onClick" text="OK" />
+      <Label fx:id="lblLabela" layoutX="245.0" layoutY="168.0" prefHeight="32.0" prefWidth="191.0" />
+      <Button fx:id="btnBotoia" layoutX="276.0" layoutY="267.0" mnemonicParsing="false" onAction="#onClick" text="OK" />
+      <ImageView fitHeight="184.0" fitWidth="317.0" layoutX="136.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@hasiera.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgBandera" fitHeight="100.0" fitWidth="142.0" layoutX="65.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

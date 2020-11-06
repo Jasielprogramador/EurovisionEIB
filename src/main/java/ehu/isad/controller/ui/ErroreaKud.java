@@ -1,11 +1,14 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.EurovisionEIB;
+import ehu.isad.controller.db.ErroreaDBKud;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +22,9 @@ public class ErroreaKud implements Initializable {
 
     @FXML
     private Button btnBotoia;
+
+    @FXML
+    private ImageView imgBandera;
 
     @FXML
     void onClick(ActionEvent event) {
@@ -36,6 +42,15 @@ public class ErroreaKud implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+       // this.irudiaLortu(main.getHerrialdeaHautatuKud().comboHerrialdeak.getValue());
+    }
+
+    private Image irudiaLortu(String herrialdea) {
+
+        Image image = null;
+        ErroreaDBKud erroreaDBKud = new ErroreaDBKud();
+        image = new Image(getClass().getResourceAsStream("/"+erroreaDBKud.lortuHerrialdearenBandera(herrialdea)+".png"));
+        return image;
 
     }
     }

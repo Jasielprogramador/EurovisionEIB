@@ -14,6 +14,22 @@ import java.util.List;
 
 public class HerrialdeaBozkatuDBKud {
 
+    public String lortuHerrialdearenBandera(String herrialdea){
+        String query = "select bandera from Herrialde where Herrialde.izena="+herrialdea;
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        ResultSet rs = dbKudeatzaile.execSQL(query);
+        String bandera="";
+
+        try {
+            while (rs.next()) {
+                bandera = rs.getString("bandera");
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return bandera;
+    }
+
     public List<Partaidea> bozkatzekoHerrialdeakKargatu(){
 
         String query = "select Ordezkaritza.*, Herrialde.bandera from Ordezkaritza inner join Herrialde where herrialdea=izena";
@@ -40,7 +56,6 @@ public class HerrialdeaBozkatuDBKud {
         }
 
     private Partaidea partaideakKargatu(String artista, String herrialdea, String abestia, Integer puntuak, String bandera) {
-        List<Partaidea> emaitza= new ArrayList<>();
         Image irudia = this.irudiaLortu(bandera);
         Partaidea partaidea = new Partaidea(irudia,herrialdea,artista,abestia,puntuak);
         return partaidea;
@@ -48,14 +63,9 @@ public class HerrialdeaBozkatuDBKud {
 
     private Image irudiaLortu(String bandera) {
 
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResource("/resources/"+bandera));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image emaitza = SwingFXUtils.toFXImage(image, null);
-        return emaitza;
+        Image image = null;
+        image = new Image(getClass().getResourceAsStream("/"+bandera+".png"));
+        return image;
+
     }
 }
