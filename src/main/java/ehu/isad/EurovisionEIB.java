@@ -3,10 +3,7 @@
  */
 package ehu.isad;
 
-import ehu.isad.controller.ui.ErroreaKud;
-import ehu.isad.controller.ui.HasieraKud;
-import ehu.isad.controller.ui.HerrialdeaBozkatuKud;
-import ehu.isad.controller.ui.HerrialdeaHautatuKud;
+import ehu.isad.controller.ui.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,15 +21,18 @@ public class EurovisionEIB extends Application {
     private Scene sceneHasiera;
     private Scene sceneHerrialdeaHautatu;
     private Scene sceneErrorea;
+    private Scene sceneTop3;
     private Scene sceneHerrialdeBozkatu;
     private Parent herrialdeaHautatuUI;
     private Parent hasieraUI;
     private Parent erroreaUI;
     private Parent herrialdeaBozkatuUI;
+    private Parent top3UI;
     private HasieraKud hasieraKud;
     private HerrialdeaHautatuKud herrialdeaHautatuKud;
     private ErroreaKud erroreaKud;
     private HerrialdeaBozkatuKud herrialdeaBozkatuKud;
+    private Top3Kud top3Kud;
 
 
     @Override
@@ -59,6 +59,8 @@ public class EurovisionEIB extends Application {
     }
 
     public void herrialdeaBozkatuErakutsi(){stage.setScene(sceneHerrialdeBozkatu);}
+
+    public void top3Erakutsi(){stage.setScene(sceneTop3);}
 
 
     //PANTAILA KARGATZEKO
@@ -87,6 +89,12 @@ public class EurovisionEIB extends Application {
         herrialdeaBozkatuKud = loaderHerrialdeaBozkatu.getController();
         herrialdeaBozkatuKud.setMainApp(this);
         sceneHerrialdeBozkatu=new Scene(herrialdeaBozkatuUI);
+
+        FXMLLoader loaderTop3 = new FXMLLoader(getClass().getResource("/top3.fxml"));
+        top3UI = (Parent) loaderTop3.load();
+        top3Kud = loaderTop3.getController();
+        top3Kud.setMainApp(this);
+        sceneTop3=new Scene(top3UI);
     }
 
     //GET-AK
@@ -98,7 +106,7 @@ public class EurovisionEIB extends Application {
         return this.herrialdeaBozkatuKud;
     }
 
-    public HerrialdeaHautatuKud getHerrialdeaHautatuKud(){return this.herrialdeaHautatuKud;}
+    public String getComboBalioa(){return this.herrialdeaHautatuKud.comboHerrialdeak.getValue();}
 
 
 }

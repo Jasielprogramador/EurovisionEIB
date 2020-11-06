@@ -22,6 +22,7 @@ import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.awt.*;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,7 +36,7 @@ public class HerrialdeaBozkatuKud implements Initializable {
     private Label lblLabela;
 
     @FXML
-    private Image imgBandera;
+    private ImageView imgBandera;
 
     @FXML
     private Button btnBotoia;
@@ -70,33 +71,33 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     @FXML
     void onClick(ActionEvent event) {
-
+        this.main.top3Erakutsi();
     }
-
+/*
     private boolean herrialdeEzinBozkatu(){
-        if(tblHerrialdea.equals(main.getHerrialdeaHautatuKud().comboHerrialdeak)){
+        if(.equals(main.getComboBalioa())){
             return true;
         }
         else{
             return false;
         }
-    }
+    }*/
 
     private Image irudiaLortu(String herrialdea) {
 
         Image image = null;
-        ErroreaDBKud erroreaDBKud = new ErroreaDBKud();
-        image = new Image(getClass().getResourceAsStream("/"+erroreaDBKud.lortuHerrialdearenBandera(herrialdea)+".png"));
+        image = new Image(getClass().getResourceAsStream("/"+HerrialdeaBozkatuDBKud.getInstance().lortuHerrialdearenBandera(herrialdea)+".png"));
         return image;
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        /*String herrialdea = main.getComboBalioa();
+        imgBandera.setImage(this.irudiaLortu(herrialdea));*/
+
         HerrialdeaBozkatuDBKud herrialdeaBozkatuDBKud = new HerrialdeaBozkatuDBKud();
-        imgBandera=this.irudiaLortu(main.getHerrialdeaHautatuKud().comboHerrialdeak.getValue());
-
-
         List<Partaidea> kargatzekoa = herrialdeaBozkatuDBKud.bozkatzekoHerrialdeakKargatu();
         ObservableList<Partaidea> Partaideak = FXCollections.observableArrayList(kargatzekoa);
 
@@ -114,19 +115,16 @@ public class HerrialdeaBozkatuKud implements Initializable {
         tblPuntuak.setCellValueFactory(new PropertyValueFactory<>("Puntuak"));
 
 
-/*        if(this.herrialdeEzinBozkatu()){
-            tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn());
-        }
-        else{
+        //if(!this.herrialdeEzinBozkatu()){
             tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        }*/
+        //}
 
         tblPuntuak.setOnEditCommit(
                 t -> {
-                    if (!this.herrialdeEzinBozkatu()) {
+                   // if(!this.herrialdeEzinBozkatu()) {
                         t.getTableView().getItems().get(t.getTablePosition().getRow())
                                 .setPuntuak(t.getNewValue());
-                    }
+                 //   }
                 });
 
         //Irudia kargatzeko

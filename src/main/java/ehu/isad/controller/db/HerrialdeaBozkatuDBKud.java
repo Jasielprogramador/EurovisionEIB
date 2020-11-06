@@ -14,6 +14,13 @@ import java.util.List;
 
 public class HerrialdeaBozkatuDBKud {
 
+    private static final HerrialdeaBozkatuDBKud instance = new HerrialdeaBozkatuDBKud();
+
+    public static HerrialdeaBozkatuDBKud getInstance() {
+        return instance;
+    }
+
+
     public String lortuHerrialdearenBandera(String herrialdea){
         String query = "select bandera from Herrialde where Herrialde.izena="+herrialdea;
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();

@@ -33,8 +33,7 @@ public class HerrialdeaHautatuKud implements Initializable {
 
     @FXML
     void onClick(ActionEvent event) {
-        HerrialdeaHautatuDBKud herrialdeaHautatuDBKud = new HerrialdeaHautatuDBKud();
-        int puntuak = herrialdeaHautatuDBKud.lortuHerrialdeBatenPuntuak(comboHerrialdeak.getValue());
+        int puntuak = HerrialdeaHautatuDBKud.getInstance().lortuHerrialdeBatenPuntuak(comboHerrialdeak.getValue());
 
         if(puntuak==5){
             main.getErroreaKud().labelIdatzi(comboHerrialdeak.getValue());

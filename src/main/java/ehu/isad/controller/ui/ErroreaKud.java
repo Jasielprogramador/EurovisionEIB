@@ -42,14 +42,13 @@ public class ErroreaKud implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       // this.irudiaLortu(main.getHerrialdeaHautatuKud().comboHerrialdeak.getValue());
+//        this.irudiaLortu(main.getComboBalioa());
     }
 
     private Image irudiaLortu(String herrialdea) {
 
         Image image = null;
-        ErroreaDBKud erroreaDBKud = new ErroreaDBKud();
-        image = new Image(getClass().getResourceAsStream("/"+erroreaDBKud.lortuHerrialdearenBandera(herrialdea)+".png"));
+        image = new Image(getClass().getResourceAsStream("/"+ErroreaDBKud.getInstance().lortuHerrialdearenBandera(herrialdea)+".png"));
         return image;
 
     }
