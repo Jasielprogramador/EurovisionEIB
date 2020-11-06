@@ -69,19 +69,9 @@ public class HerrialdeaBozkatuKud implements Initializable {
         lblLabela.setText(herrialdea + "k horrela nahi ditu bere puntuak banatu:");
     }
 
-    @FXML
-    void onClick(ActionEvent event) {
-        this.main.top3Erakutsi();
+    public void banderaJarri(String herrialdea){
+        imgBandera.setImage(this.irudiaLortu(herrialdea));
     }
-/*
-    private boolean herrialdeEzinBozkatu(){
-        if(.equals(main.getComboBalioa())){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }*/
 
     private Image irudiaLortu(String herrialdea) {
 
@@ -91,14 +81,26 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     }
 
+    @FXML
+    void onClick(ActionEvent event) {
+
+        int size = tblTaula.getItems().size();
+        for(int i=0;i<size;i++){
+            if() {
+                HerrialdeaBozkatuDBKud.getInstance().datuBaseaPuntuBerriekinAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue());
+            }
+            else{
+                HerrialdeaBozkatuDBKud.getInstance()
+            }
+        }
+
+        this.main.top3Erakutsi();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*String herrialdea = main.getComboBalioa();
-        imgBandera.setImage(this.irudiaLortu(herrialdea));*/
-
-        HerrialdeaBozkatuDBKud herrialdeaBozkatuDBKud = new HerrialdeaBozkatuDBKud();
-        List<Partaidea> kargatzekoa = herrialdeaBozkatuDBKud.bozkatzekoHerrialdeakKargatu();
+        List<Partaidea> kargatzekoa = HerrialdeaBozkatuDBKud.getInstance().bozkatzekoHerrialdeakKargatu();
         ObservableList<Partaidea> Partaideak = FXCollections.observableArrayList(kargatzekoa);
 
         //add your data to the table here.
@@ -114,18 +116,14 @@ public class HerrialdeaBozkatuKud implements Initializable {
         tblAbestia.setCellValueFactory(new PropertyValueFactory<>("Abestia"));
         tblPuntuak.setCellValueFactory(new PropertyValueFactory<>("Puntuak"));
 
-
-        //if(!this.herrialdeEzinBozkatu()){
-            tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        //}
+        tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
         tblPuntuak.setOnEditCommit(
                 t -> {
-                   // if(!this.herrialdeEzinBozkatu()) {
                         t.getTableView().getItems().get(t.getTablePosition().getRow())
                                 .setPuntuak(t.getNewValue());
-                 //   }
                 });
+
 
         //Irudia kargatzeko
         tblBandera.setCellFactory(p -> new TableCell<>() {

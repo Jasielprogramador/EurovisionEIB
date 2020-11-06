@@ -2,6 +2,8 @@ package ehu.isad.controller.db;
 
 import ehu.isad.partaideak.Partaidea;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
@@ -20,9 +22,17 @@ public class HerrialdeaBozkatuDBKud {
         return instance;
     }
 
+    public void datuBaseanDatuZaharrakAktualizatu(int puntuak,String herrialdea){
+        String query = "update Bozkaketa set puntuak = puntuak+"+puntuak+"where (bozkatuaIzanDa='"+herrialdea+"');";
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        dbKudeatzaile.execSQL(query);
+    }
+
+    public void datuBaseanDatuBerriakSartu(int )
+
 
     public String lortuHerrialdearenBandera(String herrialdea){
-        String query = "select bandera from Herrialde where Herrialde.izena="+herrialdea;
+        String query = "select bandera from Herrialde where Herrialde.izena='"+herrialdea+"'";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
         String bandera="";
@@ -75,4 +85,5 @@ public class HerrialdeaBozkatuDBKud {
         return image;
 
     }
+
 }
