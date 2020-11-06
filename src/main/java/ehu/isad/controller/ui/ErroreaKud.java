@@ -40,9 +40,12 @@ public class ErroreaKud implements Initializable {
         lblLabela.setText(herrialdea+" jada banatu ditu bere puntuak");
     }
 
+    public void banderaJarri(String herrialdea){
+        imgBandera.setImage(this.irudiaLortu(herrialdea));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        this.irudiaLortu(main.getComboBalioa());
     }
 
     private Image irudiaLortu(String herrialdea) {

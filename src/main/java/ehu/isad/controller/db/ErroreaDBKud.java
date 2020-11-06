@@ -15,7 +15,7 @@ public class ErroreaDBKud {
     }
 
     public String lortuHerrialdearenBandera(String herrialdea){
-        String query = "select bandera from Herrialde where Herrialde.izena="+herrialdea;
+        String query = "select bandera from Herrialde where Herrialde.izena='"+herrialdea+"'";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
         String bandera="";

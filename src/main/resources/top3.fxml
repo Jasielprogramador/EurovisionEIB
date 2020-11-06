@@ -17,9 +17,9 @@
       <ImageView fx:id="img1" fitHeight="36.0" fitWidth="39.0" layoutX="150.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="img2" fitHeight="36.0" fitWidth="39.0" layoutX="150.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="img3" fitHeight="36.0" fitWidth="39.0" layoutX="150.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="lbl1" layoutX="227.0" layoutY="210.0" text="Label" />
-      <Label fx:id="lbl2" layoutX="227.0" layoutY="261.0" text="Label" />
-      <Label fx:id="lbl3" layoutX="227.0" layoutY="313.0" text="Label" />
+      <Label fx:id="lbl1" layoutX="227.0" layoutY="210.0" />
+      <Label fx:id="lbl2" layoutX="227.0" layoutY="261.0" />
+      <Label fx:id="lbl3" layoutX="227.0" layoutY="313.0" />
       <Button fx:id="btnBotoia" layoutX="254.0" layoutY="339.0" mnemonicParsing="false" onAction="#onClick" text="OK" />
    </children>
 </AnchorPane>

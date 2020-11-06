@@ -106,7 +106,4 @@ public class EurovisionEIB extends Application {
         return this.herrialdeaBozkatuKud;
     }
 
-    public String getComboBalioa(){return this.herrialdeaHautatuKud.comboHerrialdeak.getValue();}
-
-
 }
