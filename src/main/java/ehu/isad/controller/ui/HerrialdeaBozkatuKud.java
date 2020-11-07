@@ -24,6 +24,7 @@ import javafx.util.converter.IntegerStringConverter;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.List;
@@ -59,6 +60,7 @@ public class HerrialdeaBozkatuKud implements Initializable {
     @FXML
     private TableColumn<Partaidea, Integer> tblPuntuak;
 
+    private String comboHerrialdea;
 
 
     public void setMainApp(EurovisionEIB main) {
@@ -73,6 +75,10 @@ public class HerrialdeaBozkatuKud implements Initializable {
         imgBandera.setImage(this.irudiaLortu(herrialdea));
     }
 
+    public void comboBalioaLortu(String herrialdea){
+        this.comboHerrialdea=herrialdea;
+    }
+
     private Image irudiaLortu(String herrialdea) {
 
         Image image = null;
@@ -81,16 +87,17 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     }
 
+
     @FXML
-    void onClick(ActionEvent event) {
+    void onClick(ActionEvent event) throws SQLException {
 
         int size = tblTaula.getItems().size();
         for(int i=0;i<size;i++){
-            if() {
-                HerrialdeaBozkatuDBKud.getInstance().datuBaseaPuntuBerriekinAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue());
+            if(HerrialdeaBozkatuDBKud.getInstance().herrialdeaDatuBaseanDago(tblHerrialdea.getCellObservableValue(i).getValue())) {
+                HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuZaharrakAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue());
             }
             else{
-                HerrialdeaBozkatuDBKud.getInstance()
+                HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(),this.comboHerrialdea);
             }
         }
 

@@ -28,7 +28,24 @@ public class HerrialdeaBozkatuDBKud {
         dbKudeatzaile.execSQL(query);
     }
 
-    public void datuBaseanDatuBerriakSartu(int )
+    public void datuBaseanDatuBerriakSartu(int puntuak,String herrialdeBozkatua,String herrialdeBozkatzailea){
+        String query = "insert into Bozkaketa values ('"+herrialdeBozkatua+"','"+herrialdeBozkatzailea+"',year(now),"+puntuak+")";
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        dbKudeatzaile.execSQL(query);
+    }
+
+    public boolean herrialdeaDatuBaseanDago(String herrialdea) throws SQLException {
+        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdea+"'";
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        ResultSet rs = dbKudeatzaile.execSQL(query);
+
+        if(!rs.next()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 
 
     public String lortuHerrialdearenBandera(String herrialdea){

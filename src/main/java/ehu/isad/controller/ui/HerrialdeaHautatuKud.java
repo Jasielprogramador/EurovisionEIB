@@ -33,6 +33,7 @@ public class HerrialdeaHautatuKud implements Initializable {
 
     @FXML
     void onClick(ActionEvent event) {
+
         int puntuak = HerrialdeaHautatuDBKud.getInstance().lortuHerrialdeBatenPuntuak(comboHerrialdeak.getValue());
 
         if(puntuak>=5){
@@ -43,6 +44,7 @@ public class HerrialdeaHautatuKud implements Initializable {
         else{
             main.getHerrialdeaBozkatuKud().labelIdatzi(comboHerrialdeak.getValue());
             main.getHerrialdeaBozkatuKud().banderaJarri(comboHerrialdeak.getValue());
+            main.getHerrialdeaBozkatuKud().comboBalioaLortu(comboHerrialdeak.getValue());
             main.herrialdeaBozkatuErakutsi();
         }
     }
