@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.ErroreaKud">
    <children>
-      <Label fx:id="lblLabela" layoutX="245.0" layoutY="168.0" prefHeight="32.0" prefWidth="191.0" />
+      <Label fx:id="lblLabela" layoutX="245.0" layoutY="168.0" prefHeight="32.0" prefWidth="344.0" />
       <Button fx:id="btnBotoia" layoutX="276.0" layoutY="267.0" mnemonicParsing="false" onAction="#onClick" text="OK" />
       <ImageView fitHeight="184.0" fitWidth="317.0" layoutX="136.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>

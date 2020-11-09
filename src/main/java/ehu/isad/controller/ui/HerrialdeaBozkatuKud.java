@@ -38,6 +38,9 @@ public class HerrialdeaBozkatuKud implements Initializable {
     private Label lblLabela;
 
     @FXML
+    private Label lblPuntuak;
+
+    @FXML
     private ImageView imgBandera;
 
     @FXML
@@ -70,6 +73,10 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     public void labelIdatzi(String herrialdea) {
         lblLabela.setText(herrialdea + "k horrela nahi ditu bere puntuak banatu:");
+    }
+
+    public void puntuakIdatzi(String herrialdea){
+        lblPuntuak.setText(5-HerrialdeaBozkatuDBKud.getInstance().lortuHerrialdeBatenPuntuak(herrialdea)+" puntu geratzen dira bozkatzeke");
     }
 
     public void banderaJarri(String herrialdea){

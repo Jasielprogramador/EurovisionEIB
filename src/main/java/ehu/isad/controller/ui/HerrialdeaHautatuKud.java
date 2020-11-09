@@ -43,6 +43,7 @@ public class HerrialdeaHautatuKud implements Initializable {
         }
         else{
             main.getHerrialdeaBozkatuKud().labelIdatzi(comboHerrialdeak.getValue());
+            main.getHerrialdeaBozkatuKud().puntuakIdatzi(comboHerrialdeak.getValue());
             main.getHerrialdeaBozkatuKud().banderaJarri(comboHerrialdeak.getValue());
             main.getHerrialdeaBozkatuKud().comboBalioaLortu(comboHerrialdeak.getValue());
             main.herrialdeaBozkatuErakutsi();

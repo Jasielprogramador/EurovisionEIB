@@ -64,6 +64,23 @@ public class HerrialdeaBozkatuDBKud {
         return bandera;
     }
 
+    public int lortuHerrialdeBatenPuntuak(String izena){
+        String query="select puntuak from Bozkaketa where bozkatuDu='"+izena+"'";
+
+        DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
+        ResultSet rs=dbKudeatzaile.execSQL(query);
+        int emaitza=0;
+
+        try {
+            while (rs.next()) {
+                emaitza=emaitza+rs.getInt("puntuak");
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return emaitza;
+    }
+
     public List<Partaidea> bozkatzekoHerrialdeakKargatu(){
 
         String query = "select Ordezkaritza.*, Herrialde.bandera from Ordezkaritza inner join Herrialde where herrialdea=izena";
