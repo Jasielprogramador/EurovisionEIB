@@ -3,6 +3,7 @@ package ehu.isad.controller.ui;
 import ehu.isad.EurovisionEIB;
 import ehu.isad.controller.db.ErroreaDBKud;
 import ehu.isad.controller.db.HerrialdeaBozkatuDBKud;
+import ehu.isad.controller.db.HerrialdeaHautatuDBKud;
 import ehu.isad.partaideak.Partaidea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,12 +93,15 @@ public class HerrialdeaBozkatuKud implements Initializable {
     void onClick(ActionEvent event) throws SQLException {
 
         int size = tblTaula.getItems().size();
-        for(int i=0;i<size;i++){
-            if(HerrialdeaBozkatuDBKud.getInstance().herrialdeaDatuBaseanDago(tblHerrialdea.getCellObservableValue(i).getValue())) {
-                HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuZaharrakAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue());
-            }
-            else{
-                HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(),this.comboHerrialdea);
+        int puntuak=0;
+        for(int j=0;j<size;j++){
+            puntuak=puntuak+tblPuntuak.getCellObservableValue(j).getValue();
+        }
+        if(puntuak<=5) {
+            for (int i = 0; i < size; i++) {
+                if (tblPuntuak.getCellObservableValue(i).getValue() > 0) {
+                    HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
+                }
             }
         }
 
@@ -124,6 +128,25 @@ public class HerrialdeaBozkatuKud implements Initializable {
         tblPuntuak.setCellValueFactory(new PropertyValueFactory<>("Puntuak"));
 
         tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        Callback<TableColumn<Partaidea, Integer>, TableCell<Partaidea, Integer>> defaultTextFieldCellFactory
+                = TextFieldTableCell.forTableColumn(new IntegerStringConverter());
+
+        tblPuntuak.setCellFactory(col -> {
+            TableCell<Partaidea, Integer> cell = defaultTextFieldCellFactory.call(col);
+
+            cell.setOnMouseClicked(event -> {
+                if (! cell.isEmpty()) {
+                    if (cell.getTableView().getSelectionModel().getSelectedItem().getHerrialdea().equals(this.comboHerrialdea)) {
+                        cell.setEditable(false);
+                    }else {
+                        cell.setEditable(true);
+                    }
+                }
+            });
+
+            return cell ;
+        });
 
         tblPuntuak.setOnEditCommit(
                 t -> {

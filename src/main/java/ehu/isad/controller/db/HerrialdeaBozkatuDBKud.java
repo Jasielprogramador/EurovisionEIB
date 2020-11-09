@@ -29,13 +29,13 @@ public class HerrialdeaBozkatuDBKud {
     }
 
     public void datuBaseanDatuBerriakSartu(int puntuak,String herrialdeBozkatua,String herrialdeBozkatzailea){
-        String query = "insert into Bozkaketa values ('"+herrialdeBozkatua+"','"+herrialdeBozkatzailea+"',year(now),"+puntuak+")";
+        String query = "insert into Bozkaketa values ('"+herrialdeBozkatua+"','"+herrialdeBozkatzailea+"',year(now()),"+puntuak+")";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(query);
     }
 
-    public boolean herrialdeaDatuBaseanDago(String herrialdea) throws SQLException {
-        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdea+"'";
+    public boolean herrialdeaDatuBaseanDago(String herrialdeBozkatua,String herrialdeBozkatzailea) throws SQLException {
+        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"'";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 

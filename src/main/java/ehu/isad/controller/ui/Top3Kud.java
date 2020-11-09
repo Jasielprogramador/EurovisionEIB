@@ -52,14 +52,14 @@ public class Top3Kud implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Partaidea> top = Top3DBKud.getInstance().top3Lortu();
-        img1.setImage(top.get(2).getBandera());
-        lbl1.setText(top.get(2).getHerrialdea()+"-"+top.get(2).getPuntuak());
+        img1.setImage(top.get(0).getBandera());
+        lbl1.setText(top.get(0).getHerrialdea()+"-"+top.get(0).getPuntuak());
 
         img2.setImage(top.get(1).getBandera());
         lbl2.setText(top.get(1).getHerrialdea()+"-"+top.get(1).getPuntuak());
 
-        img3.setImage(top.get(0).getBandera());
-        lbl3.setText(top.get(0).getHerrialdea()+"-"+top.get(0).getPuntuak());
+        img3.setImage(top.get(2).getBandera());
+        lbl3.setText(top.get(2).getHerrialdea()+"-"+top.get(2).getPuntuak());
     }
 }
 

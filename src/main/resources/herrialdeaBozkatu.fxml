@@ -23,12 +23,13 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="btnBotoia" layoutX="314.0" layoutY="458.0" mnemonicParsing="false" onAction="#onClick" text="Bozkaketak Gorde" />
-      <Label fx:id="lblLabela" layoutX="201.0" layoutY="62.0" text="Label" />
-      <ImageView fitHeight="77.0" fitWidth="266.0" layoutX="472.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lblLabela" layoutX="49.0" layoutY="19.0" text="Label" />
+      <ImageView fitHeight="50.0" fitWidth="174.0" layoutX="592.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@hasiera.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgBandera" fitHeight="87.0" fitWidth="147.0" layoutX="27.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblPuntuak" layoutX="83.0" layoutY="79.0" text="Label" />
    </children>
 </AnchorPane>

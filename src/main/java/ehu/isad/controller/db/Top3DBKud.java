@@ -18,7 +18,11 @@ public class Top3DBKud {
     }
 
     public List<Partaidea> top3Lortu(){
-        String query="select Bozkaketa.bozkatuaIzanDa,Bozkaketa.puntuak,Herrialde.bandera from Bozkaketa inner join Herrialde where bozkatuaIzanDa=izena order by puntuak";
+        String query="select b.bozkatuaIzanDa,b.puntuak,h.bandera" +
+                " from Bozkaketa b, Herrialde h " +
+                " where bozkatuaIzanDa=izena " +
+                " order by puntuak desc" +
+                " LIMIT 3";
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
         ResultSet rs=dbKudeatzaile.execSQL(query);
         Partaidea partaidea=null;
