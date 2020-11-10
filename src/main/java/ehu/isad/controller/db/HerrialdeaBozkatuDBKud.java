@@ -34,8 +34,8 @@ public class HerrialdeaBozkatuDBKud {
         dbKudeatzaile.execSQL(query);
     }
 
-    public boolean herrialdeaDatuBaseanDagoPuntuHoriekin(int puntuak,String herrialdeBozkatua,String herrialdeBozkatzailea) throws SQLException {
-        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"' and puntuak="+puntuak;
+    public boolean herrialdeBozkatzaileEtaBozkatuaDatuBaseanDaude(String herrialdeBozkatua,String herrialdeBozkatzailea) throws SQLException {
+        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"'";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 

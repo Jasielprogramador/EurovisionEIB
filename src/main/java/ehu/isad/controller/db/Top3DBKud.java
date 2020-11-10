@@ -17,24 +17,49 @@ public class Top3DBKud {
         return instance;
     }
 
+    public int puntuenBatura(String herrialdea){
+        String query="select puntuak" +
+                " from Bozkaketa" +
+                " where bozkatuaIzanDa='"+herrialdea+"'";
+
+        DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
+        ResultSet rs=dbKudeatzaile.execSQL(query);
+        int puntuak=0;
+
+        try {
+            while (rs.next()) {
+                puntuak=puntuak+rs.getInt("puntuak");
+            }
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return puntuak;
+    }
+
     public List<Partaidea> top3Lortu(){
-        String query="select b.bozkatuaIzanDa,b.puntuak,h.bandera" +
+        String query="select b.bozkatuaIzanDa,h.bandera" +
                 " from Bozkaketa b, Herrialde h " +
-                " where bozkatuaIzanDa=izena " +
-                " order by puntuak desc";
+                " where bozkatuaIzanDa=izena ";
 
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
         ResultSet rs=dbKudeatzaile.execSQL(query);
         Partaidea partaidea=null;
-        List<Partaidea> emaitza = new ArrayList<>();
+        List<Partaidea> emaitza=new ArrayList<>();
 
         try {
             while (rs.next()) {
-                int puntuak=rs.getInt("puntuak");
                 String bandera = rs.getString("bandera");
                 String herrialdea=rs.getString("bozkatuaIzanDa");
-                partaidea=new Partaidea(this.irudiaLortu(bandera),herrialdea,null,null,puntuak);
-                emaitza.add(partaidea);
+                partaidea=new Partaidea(this.irudiaLortu(bandera),herrialdea,null,null,this.puntuenBatura(herrialdea));
+                boolean aurkitua=false;
+                for(int i=0;i<emaitza.size();i++){
+                    if(emaitza.get(i).getHerrialdea().equals(herrialdea)){
+                        aurkitua = true;
+                    }
+                }
+                if(!aurkitua){
+                    emaitza.add(partaidea);
+                }
             }
         } catch(SQLException throwables){
             throwables.printStackTrace();

@@ -49,26 +49,45 @@ public class Top3Kud implements Initializable {
         this.main.hasieraErakutsi();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        List<Partaidea> top = Top3DBKud.getInstance().top3Lortu();
-        img1.setImage(top.get(0).getBandera());
-        lbl1.setText(top.get(0).getHerrialdea()+"-"+top.get(0).getPuntuak());
+    public int handienaPos(List<Partaidea> top,int lehenengoPos){
 
-        int i=1;
-        while(top.get(0).getHerrialdea().equals(top.get(i).getHerrialdea())){
+        int handiena=-1;
+        int handienaPos=0;
+        int i=0;
+
+        while(i<top.size()){
+            if(handiena<=top.get(i).getPuntuak()){
+                handiena=top.get(i).getPuntuak();
+                handienaPos=i;
+            }
             i++;
         }
-        img2.setImage(top.get(i).getBandera());
-        lbl2.setText(top.get(i).getHerrialdea()+"-"+top.get(i).getPuntuak());
-
-        int j=2;
-        while(top.get(i).getHerrialdea().equals(top.get(j).getHerrialdea()) ||
-                top.get(0).getHerrialdea().equals(top.get(j).getHerrialdea())){
-            j++;
-        }
-        img3.setImage(top.get(j).getBandera());
-        lbl3.setText(top.get(j).getHerrialdea()+"-"+top.get(j).getPuntuak());
+        return handienaPos;
     }
+
+    public void top3Kargatu(){
+        List<Partaidea> top = Top3DBKud.getInstance().top3Lortu();
+
+        int pos= this.handienaPos(top,0);
+        img1.setImage(top.get(pos).getBandera());
+        lbl1.setText(top.get(pos).getHerrialdea() + "-" + top.get(pos).getPuntuak());
+        top.remove(pos);
+
+        int pos1= this.handienaPos(top,pos);
+        img2.setImage(top.get(pos1).getBandera());
+        lbl2.setText(top.get(pos1).getHerrialdea() + "-" + top.get(pos1).getPuntuak());
+        top.remove(pos1);
+
+        int pos2= this.handienaPos(top,pos1);
+        img3.setImage(top.get(pos2).getBandera());
+        lbl3.setText(top.get(pos2).getHerrialdea() + "-" + top.get(pos2).getPuntuak());
+        top.remove(pos2);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
 }
 

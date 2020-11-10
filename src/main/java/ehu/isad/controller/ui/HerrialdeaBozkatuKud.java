@@ -112,12 +112,14 @@ public class HerrialdeaBozkatuKud implements Initializable {
             this.lblWarning.setText("");
             for (int i = 0; i < size; i++) {
                 if (tblPuntuak.getCellObservableValue(i).getValue() > 0) {
-                   // if (!HerrialdeaBozkatuDBKud.getInstance().herrialdeaDatuBaseanDagoPuntuHoriekin(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea)) {
+                    if (!HerrialdeaBozkatuDBKud.getInstance().herrialdeBozkatzaileEtaBozkatuaDatuBaseanDaude(tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea)) {
                         HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
-                 //   }
-                   /* else{
+                        main.getTop3Kud().top3Kargatu();
+                    }
+                    else{
                         HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuZaharrakAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
-                    }*/
+                        main.getTop3Kud().top3Kargatu();
+                    }
                 }
             }
             this.main.top3Erakutsi();

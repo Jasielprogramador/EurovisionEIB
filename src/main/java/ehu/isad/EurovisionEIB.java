@@ -106,4 +106,6 @@ public class EurovisionEIB extends Application {
         return this.herrialdeaBozkatuKud;
     }
 
+    public Top3Kud getTop3Kud(){return this.top3Kud;}
+
 }
