@@ -21,8 +21,8 @@ public class Top3DBKud {
         String query="select b.bozkatuaIzanDa,b.puntuak,h.bandera" +
                 " from Bozkaketa b, Herrialde h " +
                 " where bozkatuaIzanDa=izena " +
-                " order by puntuak desc" +
-                " LIMIT 3";
+                " order by puntuak desc";
+
         DBKudeatzaile dbKudeatzaile=DBKudeatzaile.getInstantzia();
         ResultSet rs=dbKudeatzaile.execSQL(query);
         Partaidea partaidea=null;

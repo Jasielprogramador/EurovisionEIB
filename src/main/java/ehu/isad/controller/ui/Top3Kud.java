@@ -55,11 +55,20 @@ public class Top3Kud implements Initializable {
         img1.setImage(top.get(0).getBandera());
         lbl1.setText(top.get(0).getHerrialdea()+"-"+top.get(0).getPuntuak());
 
-        img2.setImage(top.get(1).getBandera());
-        lbl2.setText(top.get(1).getHerrialdea()+"-"+top.get(1).getPuntuak());
+        int i=1;
+        while(top.get(0).getHerrialdea().equals(top.get(i).getHerrialdea())){
+            i++;
+        }
+        img2.setImage(top.get(i).getBandera());
+        lbl2.setText(top.get(i).getHerrialdea()+"-"+top.get(i).getPuntuak());
 
-        img3.setImage(top.get(2).getBandera());
-        lbl3.setText(top.get(2).getHerrialdea()+"-"+top.get(2).getPuntuak());
+        int j=2;
+        while(top.get(i).getHerrialdea().equals(top.get(j).getHerrialdea()) ||
+                top.get(0).getHerrialdea().equals(top.get(j).getHerrialdea())){
+            j++;
+        }
+        img3.setImage(top.get(j).getBandera());
+        lbl3.setText(top.get(j).getHerrialdea()+"-"+top.get(i).getPuntuak());
     }
 }
 

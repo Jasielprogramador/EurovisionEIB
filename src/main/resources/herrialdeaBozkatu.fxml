@@ -31,5 +31,6 @@
       </ImageView>
       <ImageView fx:id="imgBandera" fitHeight="72.0" fitWidth="116.0" layoutX="49.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lblPuntuak" layoutX="253.0" layoutY="69.0" text="Label" />
+      <Label fx:id="lblWarning" layoutX="440.0" layoutY="107.0" textFill="RED" />
    </children>
 </AnchorPane>

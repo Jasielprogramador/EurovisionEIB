@@ -22,8 +22,8 @@ public class HerrialdeaBozkatuDBKud {
         return instance;
     }
 
-    public void datuBaseanDatuZaharrakAktualizatu(int puntuak,String herrialdea){
-        String query = "update Bozkaketa set puntuak = puntuak+"+puntuak+"where (bozkatuaIzanDa='"+herrialdea+"');";
+    public void datuBaseanDatuZaharrakAktualizatu(int puntuak,String herrialdeBozkatua, String herrialdeBozkatzailea){
+        String query = "update Bozkaketa set puntuak = puntuak + "+puntuak+" where (bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"');";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(query);
     }
@@ -34,8 +34,8 @@ public class HerrialdeaBozkatuDBKud {
         dbKudeatzaile.execSQL(query);
     }
 
-    public boolean herrialdeaDatuBaseanDago(String herrialdeBozkatua,String herrialdeBozkatzailea) throws SQLException {
-        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"'";
+    public boolean herrialdeaDatuBaseanDagoPuntuHoriekin(int puntuak,String herrialdeBozkatua,String herrialdeBozkatzailea) throws SQLException {
+        String query = "select bozkatuaIzanDa from Bozkaketa where bozkatuaIzanDa='"+herrialdeBozkatua+"' and bozkatuDu='"+herrialdeBozkatzailea+"' and puntuak="+puntuak;
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 

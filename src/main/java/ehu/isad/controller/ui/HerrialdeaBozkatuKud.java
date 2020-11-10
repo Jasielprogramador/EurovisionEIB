@@ -5,6 +5,7 @@ import ehu.isad.controller.db.ErroreaDBKud;
 import ehu.isad.controller.db.HerrialdeaBozkatuDBKud;
 import ehu.isad.controller.db.HerrialdeaHautatuDBKud;
 import ehu.isad.partaideak.Partaidea;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,6 +40,9 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
     @FXML
     private Label lblPuntuak;
+
+    @FXML
+    private Label lblWarning;
 
     @FXML
     private ImageView imgBandera;
@@ -104,15 +108,27 @@ public class HerrialdeaBozkatuKud implements Initializable {
         for(int j=0;j<size;j++){
             puntuak=puntuak+tblPuntuak.getCellObservableValue(j).getValue();
         }
-        if(puntuak<=5) {
+        if(puntuak<=5 && puntuak>0) {
+            this.lblWarning.setText("");
             for (int i = 0; i < size; i++) {
                 if (tblPuntuak.getCellObservableValue(i).getValue() > 0) {
-                    HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
+                   // if (!HerrialdeaBozkatuDBKud.getInstance().herrialdeaDatuBaseanDagoPuntuHoriekin(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea)) {
+                        HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuBerriakSartu(tblPuntuak.getCellObservableValue(i).getValue(), tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
+                 //   }
+                   /* else{
+                        HerrialdeaBozkatuDBKud.getInstance().datuBaseanDatuZaharrakAktualizatu(tblPuntuak.getCellObservableValue(i).getValue(),tblHerrialdea.getCellObservableValue(i).getValue(), this.comboHerrialdea);
+                    }*/
                 }
             }
+            this.main.top3Erakutsi();
+        }
+        else if(puntuak==0){
+            this.lblWarning.setText("Ez diozu inori botoa eman");
+        }
+        else {
+            this.lblWarning.setText("Gehienez 5 botu bakarrik banatu ditzakezu");
         }
 
-        this.main.top3Erakutsi();
     }
 
     @Override
@@ -133,9 +149,15 @@ public class HerrialdeaBozkatuKud implements Initializable {
         tblArtista.setCellValueFactory(new PropertyValueFactory<>("Artista"));
         tblAbestia.setCellValueFactory(new PropertyValueFactory<>("Abestia"));
         tblPuntuak.setCellValueFactory(new PropertyValueFactory<>("Puntuak"));
-
         tblPuntuak.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
+        this.puntuakEditatu();
+        this.puntuakCommit();
+        this.irudiaKargatu();
+
+    }
+
+    public void puntuakEditatu(){
         Callback<TableColumn<Partaidea, Integer>, TableCell<Partaidea, Integer>> defaultTextFieldCellFactory
                 = TextFieldTableCell.forTableColumn(new IntegerStringConverter());
 
@@ -154,14 +176,17 @@ public class HerrialdeaBozkatuKud implements Initializable {
 
             return cell ;
         });
+    }
 
+    public void puntuakCommit(){
         tblPuntuak.setOnEditCommit(
                 t -> {
-                        t.getTableView().getItems().get(t.getTablePosition().getRow())
-                                .setPuntuak(t.getNewValue());
+                    t.getTableView().getItems().get(t.getTablePosition().getRow())
+                            .setPuntuak(t.getNewValue());
                 });
+    }
 
-
+    public void irudiaKargatu(){
         //Irudia kargatzeko
         tblBandera.setCellFactory(p -> new TableCell<>() {
             public void updateItem(Image image, boolean empty) {
@@ -179,7 +204,6 @@ public class HerrialdeaBozkatuKud implements Initializable {
                 }
             };
         });
-
     }
 }
 
