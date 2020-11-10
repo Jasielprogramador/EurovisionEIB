@@ -68,7 +68,7 @@ public class Top3Kud implements Initializable {
             j++;
         }
         img3.setImage(top.get(j).getBandera());
-        lbl3.setText(top.get(j).getHerrialdea()+"-"+top.get(i).getPuntuak());
+        lbl3.setText(top.get(j).getHerrialdea()+"-"+top.get(j).getPuntuak());
     }
 }
 
