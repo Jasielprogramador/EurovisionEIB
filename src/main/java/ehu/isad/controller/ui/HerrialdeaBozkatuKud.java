@@ -136,6 +136,9 @@ public class HerrialdeaBozkatuKud implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void partaideakKargatu(){
         List<Partaidea> kargatzekoa = HerrialdeaBozkatuDBKud.getInstance().bozkatzekoHerrialdeakKargatu();
         ObservableList<Partaidea> Partaideak = FXCollections.observableArrayList(kargatzekoa);
 
@@ -156,7 +159,6 @@ public class HerrialdeaBozkatuKud implements Initializable {
         this.puntuakEditatu();
         this.puntuakCommit();
         this.irudiaKargatu();
-
     }
 
     public void puntuakEditatu(){

@@ -36,12 +36,13 @@ public class HerrialdeaHautatuKud implements Initializable {
 
         int puntuak = HerrialdeaHautatuDBKud.getInstance().lortuHerrialdeBatenPuntuak(comboHerrialdeak.getValue());
 
-        if(puntuak>=5){
+        if(puntuak>5){
             main.getErroreaKud().labelIdatzi(comboHerrialdeak.getValue());
             main.getErroreaKud().banderaJarri(comboHerrialdeak.getValue());
             main.erroreaErakutsi();
         }
         else{
+            main.getHerrialdeaBozkatuKud().partaideakKargatu();
             main.getHerrialdeaBozkatuKud().labelIdatzi(comboHerrialdeak.getValue());
             main.getHerrialdeaBozkatuKud().puntuakIdatzi(comboHerrialdeak.getValue());
             main.getHerrialdeaBozkatuKud().banderaJarri(comboHerrialdeak.getValue());
